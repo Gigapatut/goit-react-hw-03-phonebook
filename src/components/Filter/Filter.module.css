@@ -1,0 +1,9 @@
+.inputText {
+    width: 20%;
+}
+.filterLabel {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+}
