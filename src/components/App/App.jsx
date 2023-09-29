@@ -13,10 +13,10 @@ class App extends React.Component {
 
   formSubmitHandler = data => {
     let contact = { id: nanoid(), name: data.name, number: data.number };
-    let contacts = this.state.contacts;
+    let checkArray = this.state.contacts;
 
     const contactName = [];
-    for (const contact of contacts) {
+    for (const contact of checkArray) {
       contactName.push(contact.name);
     }
        
@@ -25,11 +25,11 @@ class App extends React.Component {
       alert(`${data.name} is alredy in contacts`)
       
     } else {
-      contacts.push(contact);
-      this.setState({
-        name: data.name,
-        number: data.number,
-      });
+         this.setState(prevState => {
+           return {
+             contacts: prevState.contacts.concat(contact),
+           };
+         });
     };   
 
   };
@@ -49,7 +49,23 @@ class App extends React.Component {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }))
-  }
+  };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts'); //------------------
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  };
+  
+  componentDidUpdate(prevProps, prevState) {
+    
+    if (this.state.contacts !== prevState.contacts) {      
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }    
+  };
 
   render() {
     const { filter } = this.state;

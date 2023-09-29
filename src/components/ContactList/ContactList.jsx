@@ -1,5 +1,5 @@
 import React from "react";
-// import css from './ContactList.css'
+import css from './ContactList.module.css'
 import { nanoid } from 'nanoid';
 
 const ContactList = ({ contacts, onDeleteContact }) => (
@@ -7,9 +7,9 @@ const ContactList = ({ contacts, onDeleteContact }) => (
   <ul >
     
     {contacts.map(({ id, name, number }) => (
-      <li key={nanoid()} >        
+      <li className={css.contact} key={nanoid()} >        
         {name}: {number}
-        <button onClick={() => onDeleteContact(id)}>Delite</button>
+        <button className={css.delete} onClick={() => onDeleteContact(id)}>Delite</button>
       </li>
     ))}
   </ul>

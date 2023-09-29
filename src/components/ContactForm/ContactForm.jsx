@@ -10,7 +10,7 @@ class ContactForm extends React.Component {
 
   handleChange = event => {
     const { name, value } = event.currentTarget;
-  
+
     this.setState({ [name]: value });
   };
   handleSubmit = event => {
@@ -26,7 +26,7 @@ class ContactForm extends React.Component {
       number: '',
     });
   };
-  
+
   render() {
     return (
       <form className={css.form} onSubmit={this.handleSubmit}>
@@ -40,6 +40,7 @@ class ContactForm extends React.Component {
             onChange={this.handleChange}
           />
         </label>
+
         <label className={css.form} htmlFor={this.numberInputId}>
           Number
           <input
@@ -50,7 +51,7 @@ class ContactForm extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button className={css.add} type="submit">Add contact</button>
       </form>
     );
   }
